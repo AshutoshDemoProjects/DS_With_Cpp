@@ -8,7 +8,6 @@ class BinarySearchTree
     void inorder(Node *);
     void postorder(Node *);
     Node *remove(Node *, int);
-    void deleteDeepest(Node *, Node *);
     Node *search(Node *, int);
     Node *insert(Node *, int);
     Node *minValueNode(Node *);

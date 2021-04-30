@@ -11,6 +11,12 @@ class AVLTree
     Node *search(Node *, int);
     Node *insert(Node *, int);
     Node *minValueNode(Node *);
+    Node *rightRotate(Node *);
+    Node *leftRotate(Node *);
+    int calculateHeight(Node *);
+    int checkBalance(Node *);
+    int height(Node *);
+    int max(Node *, Node *);
 
 public:
     AVLTree();

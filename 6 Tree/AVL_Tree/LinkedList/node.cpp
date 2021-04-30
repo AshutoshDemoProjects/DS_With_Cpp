@@ -4,12 +4,14 @@ Node::Node()
     this->left = nullptr;
     this->data = 0;
     this->right = nullptr;
+    this->height = 1;
 }
 Node::Node(int data)
 {
     this->left = nullptr;
     this->data = data;
     this->right = nullptr;
+    this->height = 1;
 }
 Node::~Node()
 {
@@ -39,6 +41,14 @@ Node *Node::getRight()
 void Node::setRight(Node *right)
 {
     this->right = right;
+}
+int Node::getHeight()
+{
+    return this->height;
+}
+void Node::setHeight(int height)
+{
+    this->height = height;
 }
 std::ostream &operator<<(std::ostream &out, Node node)
 {

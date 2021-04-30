@@ -4,17 +4,21 @@ BinarySearchTree::BinarySearchTree()
 {
     this->root = nullptr;
 }
+
 void BinarySearchTree::preorder()
 {
     this->preorder(this->root);
+    std::cout << std::endl;
 }
 void BinarySearchTree::inorder()
 {
     this->inorder(this->root);
+    std::cout << std::endl;
 }
 void BinarySearchTree::postorder()
 {
     this->postorder(this->root);
+    std::cout << std::endl;
 }
 void BinarySearchTree::levelorder()
 {
@@ -29,48 +33,49 @@ void BinarySearchTree::levelorder()
             q.enqueue(temp->getRight());
         std::cout << temp->getData() << " ";
     }
+    std::cout << std::endl;
 }
-void BinarySearchTree::preorder(Node *root)
+void BinarySearchTree::preorder(Node *cn)
 {
-    if (root != nullptr)
+    if (cn != nullptr)
     {
-        std::cout << root->getData() << " ";
-        preorder(root->getLeft());
-        preorder(root->getRight());
+        std::cout << cn->getData() << " ";
+        preorder(cn->getLeft());
+        preorder(cn->getRight());
     }
 }
-void BinarySearchTree::inorder(Node *root)
+void BinarySearchTree::inorder(Node *cn)
 {
-    if (root != nullptr)
+    if (cn != nullptr)
     {
-        inorder(root->getLeft());
-        std::cout << root->getData() << " ";
-        inorder(root->getRight());
+        inorder(cn->getLeft());
+        std::cout << cn->getData() << " ";
+        inorder(cn->getRight());
     }
 }
-void BinarySearchTree::postorder(Node *root)
+void BinarySearchTree::postorder(Node *cn)
 {
-    if (root != nullptr)
+    if (cn != nullptr)
     {
-        postorder(root->getLeft());
-        postorder(root->getRight());
-        std::cout << root->getData() << " ";
+        postorder(cn->getLeft());
+        postorder(cn->getRight());
+        std::cout << cn->getData() << " ";
     }
 }
 Node *BinarySearchTree::search(int key)
 {
     return search(root, key);
 }
-Node *BinarySearchTree::search(Node *root, int key)
+Node *BinarySearchTree::search(Node *cn, int key)
 {
-    if (root == nullptr)
+    if (cn == nullptr)
         return nullptr;
-    else if (root->getData() == key)
-        return root;
-    else if (root->getData() > key)
-        search(root->getRight(), key);
-    else if (root->getData() < key)
-        search(root->getLeft(), key);
+    else if (cn->getData() == key)
+        return cn;
+    else if (cn->getData() > key)
+        search(cn->getRight(), key);
+    else if (cn->getData() < key)
+        search(cn->getLeft(), key);
 }
 void BinarySearchTree::insert(int data)
 {
@@ -90,34 +95,39 @@ void BinarySearchTree::remove(int data)
 {
     root = remove(root, data);
 }
-Node *BinarySearchTree::remove(Node *root, int key)
+Node *BinarySearchTree::remove(Node *cn, int key)
 {
-    if (root == nullptr)
+    if (cn == nullptr)
         return nullptr;
-    if (key > root->getData())
-        root->setRight(remove(root->getRight(), key));
-    else if (key < root->getData())
-        root->setLeft(remove(root->getLeft(), key));
+    if (key > cn->getData())
+        cn->setRight(remove(cn->getRight(), key));
+    else if (key < cn->getData())
+        cn->setLeft(remove(cn->getLeft(), key));
     else
     {
         Node *temp;
-        if (root->getLeft() == nullptr)
+        if (cn->getLeft() == nullptr && cn->getRight() == nullptr)
         {
-            temp = root->getRight();
-            delete root;
+            delete cn;
+            return nullptr;
+        }
+        else if (cn->getLeft() == nullptr)
+        {
+            temp = cn->getRight();
+            delete cn;
             return temp;
         }
-        else if (root->getRight() == nullptr)
+        else if (cn->getRight() == nullptr)
         {
-            temp = root->getLeft();
-            delete root;
+            temp = cn->getLeft();
+            delete cn;
             return temp;
         }
-        temp = minValueNode(root->getRight());
-        root->setData(temp->getData());
-        root->setRight(remove(root->getRight(), temp->getData()));
+        temp = minValueNode(cn->getRight());
+        cn->setData(temp->getData());
+        cn->setRight(remove(cn->getRight(), temp->getData()));
     }
-    return root;
+    return cn;
 }
 Node *BinarySearchTree::minValueNode(Node *node)
 {

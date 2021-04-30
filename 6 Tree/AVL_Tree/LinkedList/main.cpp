@@ -1,9 +1,9 @@
 #include <iostream>
-#include "binarySearchTree.h"
+#include "AVLTree.h"
 
 int main()
 {
-    BinarySearchTree bt;
+    AVLTree bt;
     int ch;
     int data;
     while (true)
